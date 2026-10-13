@@ -103,8 +103,16 @@ export function createBrowserViteConfig({
       headers: BROWSER_HEADERS,
     },
     // The preview server serves the same documents, so it carries the same
-    // framing + CSP hardening (one constant, no drift).
-    preview: { headers: BROWSER_HEADERS },
+    // framing + CSP hardening (one constant, no drift) plus the same
+    // host/port/allowedHosts wiring as the dev server (see above): a
+    // production-ish deploy that runs `build` then `preview` must bind and
+    // allowlist the same way, or a shared instance is unreachable.
+    preview: {
+      host: host || 'localhost',
+      port: parseInt(port, 10) || 4173,
+      allowedHosts: [...allowedHosts],
+      headers: BROWSER_HEADERS,
+    },
     define: {
       'import.meta.env.GOOGLE_MAPS_API_KEY': JSON.stringify(googleApiKey),
       'import.meta.env.CESIUM_ION_TOKEN': JSON.stringify(cesiumToken),

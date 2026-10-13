@@ -5,8 +5,8 @@ services:
     plan: free
     region: oregon
     branch: claude/hopeful-hopper-6bzvhr
-    buildCommand: npm ci
-    startCommand: npm run dev
+    buildCommand: npm ci && npm run build
+    startCommand: npm run preview
     envVars:
       - key: HOST
         value: 0.0.0.0
