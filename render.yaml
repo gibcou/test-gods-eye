@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: gods-eye-view-gibcou
+    runtime: node
+    plan: free
+    region: oregon
+    branch: claude/hopeful-hopper-6bzvhr
+    buildCommand: npm ci
+    startCommand: npm run dev
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: GEV_ALLOWED_HOSTS
+        value: gods-eye-view-gibcou.onrender.com
